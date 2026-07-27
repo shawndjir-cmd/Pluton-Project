@@ -18,7 +18,7 @@ class SMAStrategy(BaseStrategy):
             .mean()
         )
 
-        # HOLD is used as the default
+        # HOLD is used as the default setting
         signals["Signal"] = 0
 
         # Previous day's values
@@ -37,6 +37,10 @@ class SMAStrategy(BaseStrategy):
             (signals["Close"] < signals["SMA"])
         )
 
+        signals.loc[buy_signal, "Signal"] = 1
+        signals.loc[sell_signal, "Signal"] = -1
+
+        return signals
         signals.loc[buy_signal, "Signal"] = 1
         signals.loc[sell_signal, "Signal"] = -1
 
