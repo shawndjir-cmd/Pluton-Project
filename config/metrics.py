@@ -35,7 +35,7 @@ def sharpe_ratio(portfolio_values):
 
     returns = portfolio_values.pct_change().dropna()
 
-    # Avoid division by zero
+    # Avoids division by zero
     if returns.std() == 0:
         return 0
 
