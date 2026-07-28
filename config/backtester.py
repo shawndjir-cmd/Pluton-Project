@@ -5,7 +5,7 @@ from portfolio import Portfolio
 
 class Backtester:
     
-    #Runs trading strategy on historical data
+    #Runs trading strategy on dowloaded historical data
     def __init__(self, strategy, initial_cash=10000, take_profit=0.10, stop_loss=0.05): 
         
         self.strategy = strategy
@@ -14,12 +14,12 @@ class Backtester:
 
     def run(self, data):
 
-        # Generate BUY and SELL signals
+        # Generates the BUY and SELL signals
         signals = self.strategy.generate_signals(data)
 
         portfolio_values = []
 
-        # Loop through each trading day
+        # Loops through each trading day
         for _, row in signals.iterrows():
 
             price = row["Close"]
@@ -33,7 +33,7 @@ class Backtester:
                 self.portfolio.sell(price)
 
             # ----------------------------------
-            # Execute SMA Signals
+            # Executes the SMA Signals
             # ----------------------------------
 
             if signal == 1:
@@ -43,7 +43,7 @@ class Backtester:
                 self.portfolio.sell(price)
 
             # ----------------------------------
-            # Record Portfolio Value
+            # Records Portfolio Value in the list
             # ----------------------------------
 
             value = self.portfolio.value(price)
