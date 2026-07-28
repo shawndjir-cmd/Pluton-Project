@@ -17,7 +17,7 @@ class Portfolio:
         self.take_profit = take_profit
         self.stop_loss = stop_loss
 
-        # Percentage of available cash that can be invested
+        # Percentage of available cash that can be invested (50%)
         self.position_size = position_size
 
         # Number of completed trades
