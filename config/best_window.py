@@ -17,7 +17,7 @@ class BestWindow:
     def objective(self, trial):
 
         # -----------------------------
-        # Search Space
+        # Searches Space
         # -----------------------------
 
         window = trial.suggest_int( "window", 5, 50)
