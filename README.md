@@ -15,20 +15,17 @@ The main goal is not to just maximize profits, but to establish whether this tra
 
 ## Data
 
-The historical market data used is the SPDR S&P 500 ETF Trust (SPY), which was taken from the US market data. It was downloaded using yfinance in the Python library.
+The strategy uses historical SPDR S&P 500 ETF Trust (SPY) market data stored as CSV files. It was downloaded using yfinance in the Python library.
 
-The historical data contains the following daily market information:
+The project separates the data into:
 
-Open price
-High price
-Low price
-Close price
-Adjusted Close price
-Trading Volume
+- `spy_in_sample.csv` — used for strategy development and optimization
+- `spy_out_sample.csv` — used for out-of-sample validation
+
+Place both files inside the `data/` directory:
+
+data/
+├── spy_in_sample.csv
+└── spy_out_sample.csv
 
 The strategy primarily uses the Close price to calculate the SMA and generates trading signals.
-
-Data Split
-Dataset	Dates	Purpose
-In-Sample	Apr. 1, 2022 – Apr. 1, 2024	Strategy development and optimization
-Out-of-Sample	Apr. 2, 2024 – Apr. 1, 2025	Final strategy validation
