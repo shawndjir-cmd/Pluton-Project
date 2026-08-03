@@ -28,7 +28,7 @@ data/
 ├── spy_in_sample.csv
 └── spy_out_sample.csv
 
-'''
+'''log
 from clean_data import load_data
 
 in_sample_data = load_data("data/spy_in_sample.csv")
