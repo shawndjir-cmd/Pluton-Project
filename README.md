@@ -66,3 +66,53 @@ def evaluate(portfolio_values, trade_count):
         "Completed Trades": trade_count
     }
 ```
+
+## Optimization
+
+To enhance the strategy's performance, Optuna was implemented to the SMA, take-profit threshold, and stop-loss threshold. For each trial, Optuna picked a new parameter combination, ran it through the backtesting framework, and evaluated it using Sharpe Ratio.
+
+``` sh
+def objective(self, trial):
+
+        # -----------------------------
+        # Search Space
+        # -----------------------------
+
+        window = trial.suggest_int( "window", 5, 50)
+
+        take_profit = trial.suggest_float("take_profit", 0.03, 0.20)
+
+        stop_loss = trial.suggest_float("stop_loss", 0.01, 0.10)
+
+        
+        # Builds up strategy
+        strategy = SMAStrategy(window=window)
+
+        # Run Backtest
+        backtester = Backtester(strategy=strategy, initial_cash=self.initial_cash,
+                                take_profit=take_profit, stop_loss=stop_loss)
+
+        results = backtester.run(self.data)
+
+        # Evaluate
+        performance = evaluate(results["Portfolio Value"], backtester.portfolio.trade_count)
+
+        # Maximize Sharpe Ratio
+        return performance["Sharpe Ratio"]
+```
+
+Optimization was performed only on the in-sample dataset (April 2022–April 2024). The optimized parameters were then applied to the out-of-sample dataset (April 2024–April 2025) to evaluate how well the strategy performed on unseen market data.
+
+``` sh
+def validate(self, data):
+        """
+        Runs the trading strategy with out-of-sample data.
+        """
+
+        results = self.backtester.run(data)
+
+        performance = evaluate(results["Portfolio Value"],
+                               self.backtester.portfolio.trade_count)
+
+        return results, performance
+```
