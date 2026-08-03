@@ -25,7 +25,7 @@ Low price
 Close price
 Adjusted Close price
 Trading Volume
-
+ low
 The strategy primarily uses the Close price to calculate the SMA and generates trading signals.
 
 Data Split
