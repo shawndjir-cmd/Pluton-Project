@@ -28,12 +28,13 @@ data/
 ├── spy_in_sample.csv
 └── spy_out_sample.csv
 
-'''log
+```sh
 from clean_data import load_data
 
 in_sample_data = load_data("data/spy_in_sample.csv")
 out_sample_data = load_data("data/spy_out_sample.csv")
-'''
+```
+
 
 The strategy primarily uses the Close price to calculate the SMA and generates trading signals.
 
